@@ -1,0 +1,50 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+h1,
+h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+footer {
+  background-color: #f2f2f2;
+  padding: 10px;
+  text-align: center;
+}
+
+footer p {
+  font-size: 14px;
+  color: #999;
+}
+
+
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 10px solid black;
+  display: inline-block;
+}
+
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 10px solid black;
+  display: inline-block;
+}
+
+.searchText {
+  padding-bottom: 10px;
+}
+.total-expense {
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+.total-income {
+  padding-bottom: 20px;
+}

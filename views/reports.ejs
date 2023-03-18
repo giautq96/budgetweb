@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <title>Budget Management - Reports</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/controllers/expensesController.js"></script>
+  <script src="js/controllers/homeController.js"></script>
+  <script src="js/controllers/incomesController.js"></script>
+  <script src="js/controllers/reportsController.js"></script>
+  <script src="js/services/transactionsService.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body ng-controller="reportsController">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand" href="#">Budget Management</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/expenses">Expenses</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/incomes">Incomes</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/reports">Reports</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Reports</h1>
+        <p>Select a date range to generate a report:</p>
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="startDate">Start Date</label>
+              <input type="date" class="form-control" id="startDate" ng-model="startDate">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="endDate">End Date</label>
+              <input type="date" class="form-control" id="endDate" ng-model="endDate">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" ng-click="generateReport()">Generate Report</button>
+        </form>
+      </div>
+    </div>
+    <div ng-show="hasReport" class="container mt-5">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>All incomes and expenses</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="searchText col-md-12">
+          Search <input  type="text" ng-model="searchText">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th ng-click="sortData('name')">Name <div ng-class="getSortName('name')"></div>
+                </th>
+                <th ng-click="sortData('type')">Type <div ng-class="getSortName('type')"></div>
+                </th>
+                <th ng-click="sortData('amount')">Amount <div ng-class="getSortName('amount')"></div>
+                </th>
+                <th ng-click="sortData('date')">Date <div ng-class="getSortName('date')"></div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="transaction in transactions | orderBy:sortColumn:reverse | filter:searchText">
+                <td>{{transaction.name}}</td>
+                <td>{{transaction.type}}</td>
+                <td>{{transaction.amount}}</td>
+                <td>{{transaction.date | date:"dd/MM/yyyy"}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="total-expense col-md-12">
+          <h5>Total Expenses: <span>{{ totalExpenses | currency:'đ':0}}</span> </h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="total-income col-md-12">
+          <h5>Total Incomes: <span>{{ totalIncomes | currency:'đ':0}}</span> </h5>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <h2>All your expenses and incomes from {{startDate | date:"dd/MM/yyyy"}} to {{endDate | date:"dd/MM/yyyy"}}
+          </h2>
+          </h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <canvas id="incomeAndExpenseChart">
+          </canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <canvas>
+      </canvas>
+    </div>
+  </div>
+
+  <footer class="mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p>&copy; Budget Management 2023</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.2/dist/chart.min.js"></script>
+</body>
+</html>
