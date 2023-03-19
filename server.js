@@ -4,7 +4,7 @@ var cors = require('cors');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
-var database = require('./config/database'); 	
+// var database = require('./config/database'); 	
 var app = express();
 var PORT = process.env.PORT || 3000;
 
