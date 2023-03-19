@@ -63,11 +63,11 @@
               <td ng-hide="transaction.editing">{{transaction.amount}}</td>
               <td ng-show="transaction.editing"><input type="number" ng-model="transaction.amount" /></td>
               <td>{{transaction.date | date:"dd/MM/yyyy"}}</td>
+              <td>
                 <a class="btn btn-sm btn-primary" ng-hide="transaction.editing" ng-click="editIncome($index)">Edit</a>
                 <a class="btn btn-sm btn-primary" ng-show="transaction.editing" ng-click="saveIncome($index)">Save</a>
                 <a class="btn btn-sm btn-danger" ng-show="transaction.editing" ng-click="cancelEdit($index)">Cancel</a>
-                <a class="btn btn-sm btn-danger" ng-hide="transaction.editing"
-                  ng-click="deleteTransaction(transaction)">Delete</a>
+                <a class="btn btn-sm btn-danger" ng-hide="transaction.editing" ng-click="deleteTransaction(transaction)">Delete</a>
               </td>
             </tr>
           </tbody>
