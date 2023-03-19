@@ -21,6 +21,7 @@ const expesesRoutes = require('./app/routes/expenses.routes');
 const reportsRoutes = require('./app/routes/reportsRoutes');
 
 //ket noi database
+const URL = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.mrzht4p.mongodb.net/transactions?retryWrites=true&w=majority`
 mongoose.connect(database.myUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true
