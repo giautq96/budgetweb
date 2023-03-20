@@ -22,7 +22,7 @@ const reportsRoutes = require('./app/routes/reportsRoutes');
 
 //ket noi database
 const URL = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.mrzht4p.mongodb.net/transactions?retryWrites=true&w=majority`
-mongoose.connect(database.myUrl, {
+mongoose.connect(URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
